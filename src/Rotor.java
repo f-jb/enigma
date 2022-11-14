@@ -14,20 +14,23 @@ public class Rotor {
         }
     }
 
-    char reverseShift(char c) {
-        if ((char) (new String(rotor).indexOf(c) + 'A' - (counter - 'A')) < 'A') {
-            return (char) (((new String(rotor).indexOf(c) + 'A') - (counter - 'A')) + 25);
+
+    char reverseShift(char c){
+        char revChar = (char) ((new String(rotor).indexOf(c) + 'A') - (counter - 'A'));
+        if (revChar < 'A') {
+            return (char) (revChar + 25);
         }
 
-        return (char) ((new String(rotor).indexOf(c) + 'A') - (counter - 'A'));
+        return revChar;
     }
 
-    char shift(char c) {
-        if ((c - 'A' + (counter - 'A')) > 25) {
-            return rotor[c - 'A' + (counter - 'A') - 25];
-        }
 
-        return rotor[c + counter - 'A' * 2];
+    char shift(char c) {
+        int charIndex = (c - 'A' + counter - 'A');
+        if (charIndex > 25) {
+            charIndex -= 25;
+        }
+        return rotor[charIndex];
 
     }
 

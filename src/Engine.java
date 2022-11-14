@@ -3,6 +3,11 @@ public class Engine {
         Rotor middleRotor;
         Rotor leftRotor;
         Reflector reflector;
+        void dangerChar(char c){
+            if (c > 'Z' || c < 'A'){
+                System.out.println("DANGER DANGER");
+            }
+        }
 
         Engine(int rightRotor, int middleRotor, int leftRotor, int reflector, String counterSetting){
             this.rightRotor = new Rotor(rightRotor, counterSetting.toCharArray()[2]);
@@ -22,15 +27,27 @@ public class Engine {
 
                     System.out.println("First shift");
                     c = rightRotor.shift(c);
+                    System.out.println("THIS IS THE CHAR! " + c);
                     System.out.println("second shift");
+                    dangerChar(c);
                     c = middleRotor.shift(c);
                     System.out.println("third shift");
+                    dangerChar(c);
                     c = leftRotor.shift(c);
                     System.out.println("reflector");
+                    dangerChar(c);
                     c = reflector.shift(c);
+                    System.out.println("reverse third shift");
+                    dangerChar(c);
                     c = leftRotor.reverseShift(c);
+                    System.out.println("reverse second shift");
+                    dangerChar(c);
                     c = middleRotor.reverseShift(c);
+                    System.out.println("reverse one shift");
+                    dangerChar(c);
                     c = rightRotor.reverseShift(c);
+                    System.out.println("final char");
+                    dangerChar(c);
 
 
                     rightRotor.increaseCounter();

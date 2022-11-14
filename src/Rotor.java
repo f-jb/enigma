@@ -9,7 +9,7 @@ public class Rotor {
     }
 
     void increaseCounter() {
-        System.out.println("before incremeant counter is " + counter);
+        System.out.println("before increment counter is " + counter);
         counter++;
         System.out.println("After increment it is " + counter);
         if (counter > ('Z')) {
@@ -18,12 +18,19 @@ public class Rotor {
         }
     }
     char reverseShift(char c){
-        return (char)(new String(rotor).indexOf(c) + 'A');
+        if((char)((new String(rotor).indexOf(c) + 'A') - (counter - 'A')) > 'Z') {
+            System.out.println("Danger in reverseshift");
+        }
+        if ((char)(new String(rotor).indexOf(c) + 'A' - (counter - 'A')) < 'A') {
+            return (char)(((new String(rotor).indexOf(c) + 'A') - (counter - 'A')) + 25);
+        }
+
+        return (char)((new String(rotor).indexOf(c) + 'A') - (counter - 'A'));
     }
 
     char shift(char c) {
-        if (26 < (c - 'A' + (counter - 'A'))) {
-            return rotor[c - 'A' + (counter - 'A') - 26];
+        if ((c - 'A' + (counter - 'A')) > 25) {
+            return rotor[c - 'A' + (counter - 'A') - 25];
         }
 
         System.out.println("counter is " + counter);
@@ -34,7 +41,7 @@ public class Rotor {
     Rotor(int rotorNumber, char counter) {
         this.rotor = rotorSettings.getSettings(rotorNumber);
         this.turnover = turnoverSettings.getSettings(rotorNumber);
-        this.counter = counter;
+        this.counter = Character.toUpperCase(counter);
     }
 
 }
